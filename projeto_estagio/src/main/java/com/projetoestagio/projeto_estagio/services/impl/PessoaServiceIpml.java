@@ -1,0 +1,93 @@
+package com.projetoestagio.projeto_estagio.services.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Service;
+
+import com.projetoestagio.projeto_estagio.entities.Pessoa;
+import com.projetoestagio.projeto_estagio.repositories.PessoaRepository;
+import com.projetoestagio.projeto_estagio.services.PessoaService;
+
+import jakarta.persistence.EntityNotFoundException;
+
+@Service
+public class PessoaServiceIpml implements PessoaService{
+	private  PessoaRepository pessoaRepository ;
+	
+	
+	public PessoaServiceIpml(PessoaRepository pessoaRepository) {
+		this.pessoaRepository = pessoaRepository;
+	}
+
+	@Override
+	public Pessoa findById(Long id) {
+		Optional<Pessoa> pessoa = pessoaRepository.findById(id);
+//		Pessoa pessoaResposta=new Pessoa();
+//		if(pessoa.isPresent()) {
+//			pessoaResposta=pessoa.get();
+//				}
+//		
+//		return pessoaResposta
+			return pessoa.orElseThrow(() -> new EntityNotFoundException("Pessoa não encontrada"));
+	}
+
+
+	
+	@Override
+	public List<Pessoa> findByName(String name){
+		List<Pessoa> pessoa = pessoaRepository.findByName(name);
+
+		return pessoa;
+		
+		
+	}
+
+	@Override
+	public Pessoa criarPessoa(Pessoa pessoa) {
+		Pessoa pessoaResposta= new Pessoa();
+		
+		if(!(pessoa.getName().isEmpty() && pessoa.getCpf().isEmpty())) {
+			pessoaResposta.setCpf(pessoa.getCpf());
+			pessoaResposta.setName(pessoa.getName());
+			pessoaResposta.setEmail(pessoa.getEmail());
+			pessoaResposta.setNascimento(pessoa.getNascimento());
+			pessoaResposta.setTelefone(pessoa.getTelefone());
+			Pessoa pessoaSalva = pessoaRepository.save(pessoaResposta);
+			return pessoaSalva;
+		}
+		return null;
+	}
+
+	@Override
+	public String deleteById(Long id) {
+		Optional<Pessoa> pessoaOpt = pessoaRepository.findById(id);
+		Pessoa pessoaResposta = new Pessoa();
+		if(pessoaOpt.isPresent()) {
+			 pessoaResposta= pessoaOpt.get();
+			 pessoaRepository.deleteById(pessoaResposta.getId());
+			return "Pessoa Excluida com sucesso";	
+		}
+		return "Pessoa não foi encontrada";
+	}
+
+	@Override
+	public Pessoa atualizarPessoa(Pessoa pessoa) {
+		Optional<Pessoa> pessoaOpt = pessoaRepository.findById(pessoa.getId());
+		Pessoa pessoaResposta = new Pessoa();
+		if(pessoaOpt.isPresent()) {
+			 pessoaResposta= pessoaOpt.get();
+			 pessoaResposta.setCpf(pessoa.getCpf());
+				pessoaResposta.setName(pessoa.getName());
+				pessoaResposta.setEmail(pessoa.getEmail());
+				pessoaResposta.setNascimento(pessoa.getNascimento());
+				pessoaResposta.setTelefone(pessoa.getTelefone());
+				Pessoa pessoaSalva = pessoaRepository.save(pessoaResposta);
+				return pessoaSalva;
+		}
+		return null;
+	}
+
+}
