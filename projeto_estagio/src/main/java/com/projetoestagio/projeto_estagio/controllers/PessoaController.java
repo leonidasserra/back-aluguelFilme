@@ -18,9 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.projetoestagio.projeto_estagio.entities.Pessoa;
+import com.projetoestagio.projeto_estagio.exceptions.BadRequestAlertException;
 import com.projetoestagio.projeto_estagio.services.PessoaService;
-
-import jakarta.persistence.EntityNotFoundException;
 
 @RestController
 @RequestMapping("/pessoa")
@@ -44,32 +43,38 @@ public class PessoaController {
 	} 
 	
 	@GetMapping("/buscar/{id}")
-	public ResponseEntity<?> buscarPessoaId(@PathVariable Long id){
-		try {
+	public ResponseEntity<Pessoa> buscarPessoaId(@PathVariable Long id){
+		if(pessoaService.existsById(id)) {
 		Pessoa respostaPessoa= pessoaService.findById(id);
-		return ResponseEntity.ok(respostaPessoa);}
+			return ResponseEntity.ok(respostaPessoa);}
 		
-		catch (EntityNotFoundException e) {
-	        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		else {
+	        throw new BadRequestAlertException("Entity not found", "pessoa", "idnotfound");
 	    }
 	} 
 	
+
 	@GetMapping("/buscar")
-	public ResponseEntity</*List<Pessoa> */ ?> buscarPessoaName(@RequestParam String name){
+	public ResponseEntity<List<Pessoa>> buscarPessoaName(@RequestParam String name){
 		List<Pessoa> respostaPessoa= pessoaService.findByName(name);
 		return ResponseEntity.ok(respostaPessoa);
+		
 	}
 	
 	@DeleteMapping("/deletar/{id}")
-	public ResponseEntity<Void> deletarPessoaId(@PathVariable Long id){
-		try {
-		String respostaPessoa= pessoaService.deleteById(id);
-		return ResponseEntity.noContent().build();}
-		
-		catch(EntityNotFoundException e){
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-	
+	public ResponseEntity<Void> deletarPessoaId(@PathVariable Long id) {
+	    if (id == null) {
+	        throw new BadRequestAlertException("Invalid id", "pessoa", "idnull");
+	    }
+
+	    if (!pessoaService.existsById(id)) {
+	        throw new BadRequestAlertException("Entity not found", "pessoa", "idnotfound");
+	    }
+
+	    pessoaService.deleteById(id);
+
+	    return ResponseEntity.noContent().build();
 	}
+
 	
 }

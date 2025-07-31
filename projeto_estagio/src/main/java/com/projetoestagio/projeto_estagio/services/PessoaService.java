@@ -11,4 +11,5 @@ public interface PessoaService {
     Pessoa criarPessoa(Pessoa pessoa);
 	String deleteById(Long id);
 	Pessoa atualizarPessoa(Pessoa pessoa);
+	boolean existsById(Long id);
 }

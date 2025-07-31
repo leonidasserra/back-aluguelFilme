@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.projetoestagio.projeto_estagio.entities.Pessoa;
+import com.projetoestagio.projeto_estagio.exceptions.BadRequestAlertException;
 import com.projetoestagio.projeto_estagio.repositories.PessoaRepository;
 import com.projetoestagio.projeto_estagio.services.PessoaService;
 
@@ -25,14 +26,15 @@ public class PessoaServiceIpml implements PessoaService{
 	@Override
 	public Pessoa findById(Long id) {
 		Optional<Pessoa> pessoa = pessoaRepository.findById(id);
-//		Pessoa pessoaResposta=new Pessoa();
-//		if(pessoa.isPresent()) {
-//			pessoaResposta=pessoa.get();
-//				}
-//		
-//		return pessoaResposta
-			return pessoa.orElseThrow(() -> new EntityNotFoundException("Pessoa não encontrada"));
-	}
+		Pessoa pessoaResposta=new Pessoa();
+		if(pessoa.isPresent()) {
+			pessoaResposta=pessoa.get();
+				}
+		
+		return pessoaResposta;
+//			return pessoa.orElseThrow(() -> new EntityNotFoundException("Pessoa não encontrada"));
+//	 
+} 
 
 
 	
@@ -40,7 +42,12 @@ public class PessoaServiceIpml implements PessoaService{
 	public List<Pessoa> findByName(String name){
 		List<Pessoa> pessoa = pessoaRepository.findByName(name);
 
-		return pessoa;
+		if(pessoa.isEmpty()) {
+			throw new BadRequestAlertException("Pessoa não encontrada", "pessoa", "namenotfound");
+		}
+
+			return pessoa;
+				
 		
 		
 	}
@@ -89,5 +96,17 @@ public class PessoaServiceIpml implements PessoaService{
 		}
 		return null;
 	}
+
+	@Override
+	public boolean existsById(Long id) {
+		Optional<Pessoa> pessoaOpt = pessoaRepository.findById(id);
+		//Pessoa pessoaResposta = new Pessoa();
+		if(pessoaOpt.isPresent()) {
+			return true;
+		}
+		else {
+		return false;
+	}
+		}
 
 }

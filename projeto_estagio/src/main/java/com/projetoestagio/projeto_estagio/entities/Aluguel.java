@@ -3,11 +3,14 @@ package com.projetoestagio.projeto_estagio.entities;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.io.Serializable;
 
-public class Aluguel {
+@Entity
+public class Aluguel implements Serializable {
 // acho que ta errado	private Filme filme;
 	
 	@Id
