@@ -35,8 +35,8 @@ public class Aluguel implements Serializable {
 	
     @ManyToMany
     @JoinTable(
-        name = "emprestimo_filmes",
-        joinColumns = @JoinColumn(name = "emprestimo_id"),
+        name = "aluguel_filmes",
+        joinColumns = @JoinColumn(name = "aluguel_id"),
         inverseJoinColumns = @JoinColumn(name = "filme_id")
     )
     private List<Filme> filmes;

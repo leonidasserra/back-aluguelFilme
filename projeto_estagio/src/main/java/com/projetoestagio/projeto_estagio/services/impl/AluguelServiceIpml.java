@@ -47,13 +47,15 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
     }
 
 
+  //READEQUAR CRIAR ALUGUEL
+    
     @Override
     public Aluguel criarAluguel(Aluguel aluguel) {
         if (aluguel.getValorAluguel() != null && aluguel.getDataAluguel() != null) {
             Aluguel aluguelResposta = new Aluguel();
             aluguelResposta.setValorAluguel(aluguel.getValorAluguel());
             aluguelResposta.setDataAluguel(aluguel.getDataAluguel());
-            Filme filme = filmeService.findById(aluguel.getFilme().getId());
+            Filme filme = filmeService.findById(aluguel.getFilmes().getId());
             if(aluguel.getPessoa().getId()!=null && aluguel.getFilme().getId()!=null) {
             	Optional<Pessoa> pessoa = Optional.of(pessoaService.findById(aluguel.getPessoa().getId()));
             	aluguelResposta.setPessoa(pessoa.get());
