@@ -3,13 +3,17 @@ package com.projetoestagio.projeto_estagio.entities;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 import java.io.Serializable;
 
@@ -29,23 +33,27 @@ public class Aluguel implements Serializable {
     @JoinColumn(name = "pessoa_id") // chave estrangeira no banco
     private Pessoa pessoa;
 	
+    @ManyToMany
+    @JoinTable(
+        name = "emprestimo_filmes",
+        joinColumns = @JoinColumn(name = "emprestimo_id"),
+        inverseJoinColumns = @JoinColumn(name = "filme_id")
+    )
+    private List<Filme> filmes;
+    
 	public Aluguel() {
 	}
 	
-	
-
-	
 	public Aluguel(Long id, BigDecimal valorAluguel, LocalDate dataAluguel, LocalDate devolucaoPrevista, String status,
-			Pessoa pessoa) {
+			Pessoa pessoa, List<Filme> filmes) {
 		this.id = id;
 		this.valorAluguel = valorAluguel;
 		this.dataAluguel = dataAluguel;
 		this.devolucaoPrevista = devolucaoPrevista;
 		this.status = status;
 		this.pessoa = pessoa;
+		this.filmes = filmes;
 	}
-
-
 
 
 	public Pessoa getPessoa() {
@@ -86,6 +94,18 @@ public class Aluguel implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+
+	public List<Filme> getFilmes() {
+		return filmes;
+	}
+
+	public void setFilmes(List<Filme> filmes) {
+		this.filmes = filmes;
+	}
+
+
+
 
 
 		

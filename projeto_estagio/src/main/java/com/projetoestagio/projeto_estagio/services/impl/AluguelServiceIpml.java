@@ -6,12 +6,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.projetoestagio.projeto_estagio.entities.Filme;
 import com.projetoestagio.projeto_estagio.entities.Aluguel;
 import com.projetoestagio.projeto_estagio.entities.Pessoa;
 import com.projetoestagio.projeto_estagio.exceptions.BadRequestAlertException;
 import com.projetoestagio.projeto_estagio.repositories.AluguelRepository;
 import com.projetoestagio.projeto_estagio.services.AluguelService;
+import com.projetoestagio.projeto_estagio.services.FilmeService;
 import com.projetoestagio.projeto_estagio.services.PessoaService;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -22,6 +23,9 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
 	@Autowired
 	private PessoaService pessoaService;
 	
+	@Autowired
+	private FilmeService filmeService;
+	
     @Autowired
     private AluguelRepository aluguelRepository;
 
@@ -29,6 +33,12 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
     public List<Aluguel> buscarPorNomePessoa(String nome) {
         return aluguelRepository.findByPessoaNameContainingIgnoreCase(nome);
     }
+    
+    @Override
+    public List<Aluguel> buscarPorTituloFilme(String title) {
+        return aluguelRepository.findByFilmeTitleContainingIgnoreCase(title);
+    }
+
 
     @Override
     public Aluguel findById(Long id) {
@@ -43,17 +53,28 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
             Aluguel aluguelResposta = new Aluguel();
             aluguelResposta.setValorAluguel(aluguel.getValorAluguel());
             aluguelResposta.setDataAluguel(aluguel.getDataAluguel());
-            
-            if(aluguel.getPessoa().getId()!=null) {
+            Filme filme = filmeService.findById(aluguel.getFilme().getId());
+            if(aluguel.getPessoa().getId()!=null && aluguel.getFilme().getId()!=null) {
             	Optional<Pessoa> pessoa = Optional.of(pessoaService.findById(aluguel.getPessoa().getId()));
             	aluguelResposta.setPessoa(pessoa.get());
-            	System.out.println("Pessoa: " + aluguelResposta.getPessoa());
+            	//System.out.println("Pessoa: " + aluguelResposta.getPessoa());
+            	
+            	
+            	// Verificar se há estoque
+                if (filme.getQuantidadeEstoque() <= 0) {
+                    throw new BadRequestAlertException("Filme sem estoque disponível", "filme", "estoquezerado");
+                }
             	}
+            aluguelResposta.setFilme(filme);
+            
+            //Decrescimo no Estoque
+            filme.setQuantidadeEstoque(filme.getQuantidadeEstoque()-1);
+            filmeService.salvarFilme(filme);
+
             
             // Supondo que dataAluguel seja LocalDate:
             LocalDate data = aluguel.getDataAluguel();
             aluguelResposta.setDevolucaoPrevista(data.plusDays(30));
-            aluguelResposta.setPessoa(aluguel.getPessoa());
             aluguelResposta.setStatus("Ativo");
             return aluguelRepository.save(aluguelResposta);
         }

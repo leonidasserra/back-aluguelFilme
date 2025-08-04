@@ -11,4 +11,5 @@ public interface AluguelService {
 	String deleteById(Long id);
 	List<Aluguel> buscarPorNomePessoa(String nome);
 	boolean existsById(Long id);
+	List<Aluguel> buscarPorTituloFilme(String titulo);
 }

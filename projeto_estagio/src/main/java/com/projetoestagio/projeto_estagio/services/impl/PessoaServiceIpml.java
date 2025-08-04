@@ -19,9 +19,9 @@ public class PessoaServiceIpml implements PessoaService{
 	private  PessoaRepository pessoaRepository ;
 	
 	
-	public PessoaServiceIpml(PessoaRepository pessoaRepository) {
-		this.pessoaRepository = pessoaRepository;
-	}
+//	public PessoaServiceIpml(PessoaRepository pessoaRepository) {
+//		this.pessoaRepository = pessoaRepository;
+//	}
 
 	@Override
 	public Pessoa findById(Long id) {
@@ -56,12 +56,13 @@ public class PessoaServiceIpml implements PessoaService{
 	public Pessoa criarPessoa(Pessoa pessoa) {
 		Pessoa pessoaResposta= new Pessoa();
 		
-		if(!(pessoa.getName().isEmpty() && pessoa.getCpf().isEmpty())) {
+		if(!(pessoa.getName().isEmpty() || pessoa.getCpf().isEmpty() || pessoa.getSenha().isEmpty())) {
 			pessoaResposta.setCpf(pessoa.getCpf());
 			pessoaResposta.setName(pessoa.getName());
 			pessoaResposta.setEmail(pessoa.getEmail());
 			pessoaResposta.setNascimento(pessoa.getNascimento());
 			pessoaResposta.setTelefone(pessoa.getTelefone());
+			pessoaResposta.setSenha(pessoa.getSenha());
 			Pessoa pessoaSalva = pessoaRepository.save(pessoaResposta);
 			return pessoaSalva;
 		}
