@@ -10,6 +10,7 @@ import com.projetoestagio.projeto_estagio.entities.Filme;
 public interface FilmeService {
 	Filme findById(Long id);
 	List<Filme> findByName(String name);
+	List<Filme> findByIdList(List<Long> ids);
 	String deleteById(Long id);
 	Filme criarFilme(Filme filme);
 	Filme atualizarFilme(Filme filme);

@@ -1,6 +1,7 @@
 package com.projetoestagio.projeto_estagio.services.impl;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,23 +56,38 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
             Aluguel aluguelResposta = new Aluguel();
             aluguelResposta.setValorAluguel(aluguel.getValorAluguel());
             aluguelResposta.setDataAluguel(aluguel.getDataAluguel());
-            Filme filme = filmeService.findById(aluguel.getFilmes().getId());
-            if(aluguel.getPessoa().getId()!=null && aluguel.getFilme().getId()!=null) {
+            
+            // 1. Extrair os IDs dos filmes recebidos
+            List<Long> filmeIds = new ArrayList<>();
+            for (Filme f : aluguel.getFilmes()) {
+                filmeIds.add(f.getId());
+            }
+           
+            // 2. Buscar os filmes completos do banco
+            List<Filme> filmes = filmeService.findByIdList(filmeIds);
+            
+            
+            if(aluguel.getPessoa().getId()!=null && aluguel.getFilmes()!=null) {
             	Optional<Pessoa> pessoa = Optional.of(pessoaService.findById(aluguel.getPessoa().getId()));
             	aluguelResposta.setPessoa(pessoa.get());
             	//System.out.println("Pessoa: " + aluguelResposta.getPessoa());
             	
-            	
-            	// Verificar se há estoque
-                if (filme.getQuantidadeEstoque() <= 0) {
-                    throw new BadRequestAlertException("Filme sem estoque disponível", "filme", "estoquezerado");
+            	for (Filme f : filmes) {
+            		// Verificar se há estoque
+                    if (f.getQuantidadeEstoque() <= 0) {
+                        throw new BadRequestAlertException("Filme sem estoque disponível", "filme", "estoquezerado");
+                    }
                 }
-            	}
-            aluguelResposta.setFilme(filme);
+            }
+
+            	
+            aluguelResposta.setFilmes(filmes);
             
+            for (Filme f : filmes) {
             //Decrescimo no Estoque
-            filme.setQuantidadeEstoque(filme.getQuantidadeEstoque()-1);
-            filmeService.salvarFilme(filme);
+            f.setQuantidadeEstoque(f.getQuantidadeEstoque()-1);
+            filmeService.salvarFilme(f);
+            }
 
             
             // Supondo que dataAluguel seja LocalDate:

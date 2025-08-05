@@ -10,5 +10,6 @@ import com.projetoestagio.projeto_estagio.entities.Pessoa;
 public interface AluguelRepository extends JpaRepository<Aluguel,Long> {
 	//List<Aluguel> findByName(@Param("name") String name);
 	List<Aluguel> findByPessoaNameContainingIgnoreCase(String name);
+	
 	List<Aluguel> findByFilmeTitleContainingIgnoreCase(String title);
 }

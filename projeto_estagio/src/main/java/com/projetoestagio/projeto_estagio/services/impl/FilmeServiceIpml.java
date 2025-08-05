@@ -84,6 +84,20 @@ public class FilmeServiceIpml implements FilmeService  {
     public Filme salvarFilme(Filme filme) {
         return filmeRepository.save(filme); //  salva alterações (usado no set do novo estoque)
     }
+
+    
+    @Override
+    public List<Filme> findByIdList(List<Long> ids) {
+        List<Filme> filmes = filmeRepository.findAllById(ids);
+
+        if (filmes.size() != ids.size()) {
+            throw new BadRequestAlertException("Um ou mais filmes não foram encontrados", "filme", "idnotfound");
+        }
+
+        return filmes;
+    }
+
+
 	
 	
 }
