@@ -16,5 +16,6 @@ public interface FilmeService {
 	Filme atualizarFilme(Filme filme);
 	Filme salvarFilme(Filme filme);
 	boolean existsById(Long id);
+	List<Filme> findAll();
 }
 

@@ -22,7 +22,7 @@ public class Pessoa implements Serializable {
 	private String telefone;
 	private String name;
 	private String email;
-	private String senha;
+//	private String senha;
 	
 	private Date nascimento;
 	
@@ -32,13 +32,9 @@ public class Pessoa implements Serializable {
 	
 	
 	public Pessoa() {
-	}
+	}	
 
-
-
-
-
-	public Pessoa(Long id, String cpf, String telefone, String name, String email, String senha, Date nascimento,
+	public Pessoa(Long id, String cpf, String telefone, String name, String email, Date nascimento,
 			List<Aluguel> aluguel) {
 		super();
 		this.id = id;
@@ -46,111 +42,74 @@ public class Pessoa implements Serializable {
 		this.telefone = telefone;
 		this.name = name;
 		this.email = email;
-		this.senha = senha;
 		this.nascimento = nascimento;
 		this.aluguel = aluguel;
 	}
-
-
-
-
-
-	public String getSenha() {
-		return senha;
-	}
-
-
-
-
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-
-
 
 
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getCpf() {
 		return cpf;
 	}
 
-
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-
 
 	public String getTelefone() {
 		return telefone;
 	}
 
-
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public Date getNascimento() {
 		return nascimento;
 	}
 
-
 	public void setNascimento(Date nascimento) {
 		this.nascimento = nascimento;
 	}
-
 
 	public List<Aluguel> getAluguel() {
 		return aluguel;
 	}
 
-
 	public void setAluguel(List<Aluguel> aluguel) {
 		this.aluguel = aluguel;
 	}
 
-
+	
+	
 	@Override
 	public String toString() {
 		return "Pessoa [id=" + id + ", cpf=" + cpf + ", telefone=" + telefone + ", name=" + name + ", email=" + email
 				+ ", nascimento=" + nascimento + ", aluguel=" + aluguel + "]";
 	}
-
-	
-
-
-
 
 
 }

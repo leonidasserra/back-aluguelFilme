@@ -51,15 +51,19 @@ public class FilmeServiceIpml implements FilmeService  {
 	public Filme criarFilme(Filme filme) {
 		Filme filmeResposta=new Filme();
 		
-		if(!(filme.getTitle().isEmpty() || filme.getAno()==null || filme.getQuantidadeEstoque()==null )) {
+		if(!(filme.getTitle().isEmpty() ||filme.getTitle().trim().isEmpty() || filme.getAno()==null || filme.getQuantidadeEstoque()==null )) {
 			filmeResposta.setAno(filme.getAno());
-			filmeResposta.setTitle(filme.getTitle());
+			filmeResposta.setTitle(filme.getTitle().trim());
 			filmeResposta.setGenero(filme.getGenero());
 			filmeResposta.setQuantidadeEstoque(filme.getQuantidadeEstoque());
+			filmeResposta.setSinopse(filme.getSinopse());
+			filmeResposta.setDiretor(filme.getDiretor());
+			filmeResposta.setClassificacao(filme.getClassificacao());
+			filmeResposta.setDuracao(filme.getDuracao());
 
-			return filmeResposta;
+			return filmeRepository.save(filmeResposta);
 		}
-		throw new BadRequestAlertException("Dados incompletos para criar aluguel", "filme", "dadosinvalidos");
+		throw new BadRequestAlertException("Dados incompletos para criar filmes", "filme", "dadosinvalidos");
 	}
 
 	@Override
@@ -97,7 +101,13 @@ public class FilmeServiceIpml implements FilmeService  {
         return filmes;
     }
 
-
+    @Override
+    public List<Filme> findAll(){
+    	List<Filme> todosFilmes=filmeRepository.findAll();
+    	
+    	return todosFilmes;
+    }
+    
 	
 	
 }

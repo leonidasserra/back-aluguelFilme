@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import com.projetoestagio.projeto_estagio.entities.Filme;
 import com.projetoestagio.projeto_estagio.entities.Pessoa;
 import com.projetoestagio.projeto_estagio.exceptions.BadRequestAlertException;
 import com.projetoestagio.projeto_estagio.repositories.PessoaRepository;
@@ -56,13 +57,13 @@ public class PessoaServiceIpml implements PessoaService{
 	public Pessoa criarPessoa(Pessoa pessoa) {
 		Pessoa pessoaResposta= new Pessoa();
 		
-		if(!(pessoa.getName().isEmpty() || pessoa.getCpf().isEmpty() || pessoa.getSenha().isEmpty())) {
+		if(!(pessoa.getName().isEmpty() || pessoa.getCpf().isEmpty() /*|| pessoa.getSenha().isEmpty()*/)) {
 			pessoaResposta.setCpf(pessoa.getCpf());
 			pessoaResposta.setName(pessoa.getName());
 			pessoaResposta.setEmail(pessoa.getEmail());
 			pessoaResposta.setNascimento(pessoa.getNascimento());
 			pessoaResposta.setTelefone(pessoa.getTelefone());
-			pessoaResposta.setSenha(pessoa.getSenha());
+//			pessoaResposta.setSenha(pessoa.getSenha());
 			Pessoa pessoaSalva = pessoaRepository.save(pessoaResposta);
 			return pessoaSalva;
 		}
@@ -110,4 +111,11 @@ public class PessoaServiceIpml implements PessoaService{
 	}
 		}
 
+    @Override
+    public List<Pessoa> findAll(){
+    	List<Pessoa> todasPessoas=pessoaRepository.findAll();
+    	
+    	return todasPessoas;
+    }
+	
 }
