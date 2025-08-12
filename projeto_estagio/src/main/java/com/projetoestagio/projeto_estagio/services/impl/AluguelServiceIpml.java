@@ -30,99 +30,101 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
     @Autowired
     private AluguelRepository aluguelRepository;
 
-    @Override
-    public List<Aluguel> buscarPorNomePessoa(String nome) {
-        return aluguelRepository.findByPessoaNameContainingIgnoreCase(nome);
-    }
-    
-    @Override
-    public List<Aluguel> buscarPorTituloFilme(String title) {
-        return aluguelRepository.findByFilmeTitleContainingIgnoreCase(title);
-    }
-
-
-    @Override
-    public Aluguel findById(Long id) {
-        return aluguelRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Aluguel não encontrado"));
-    }
+//    @Override
+//    public List<Aluguel> buscarPorNomePessoa(String nome) {
+//        return aluguelRepository.findByPessoaNameContainingIgnoreCase(nome);
+//    }
+//    
+//    @Override
+//    public List<Aluguel> buscarPorTituloFilme(String title) {
+//        return aluguelRepository.findByFilmeTitleContainingIgnoreCase(title);
+//    }
+//
+//
+//    @Override
+//    public Aluguel findById(Long id) {
+//        return aluguelRepository.findById(id)
+//                .orElseThrow(() -> new EntityNotFoundException("Aluguel não encontrado"));
+//    }
 
 
   //READEQUAR CRIAR ALUGUEL
     
     @Override
     public Aluguel criarAluguel(Aluguel aluguel) {
-        if (aluguel.getValorAluguel() != null && aluguel.getDataAluguel() != null) {
-            Aluguel aluguelResposta = new Aluguel();
-            aluguelResposta.setValorAluguel(aluguel.getValorAluguel());
-            aluguelResposta.setDataAluguel(aluguel.getDataAluguel());
-            
-            // 1. Extrair os IDs dos filmes recebidos
-            List<Long> filmeIds = new ArrayList<>();
-            for (Filme f : aluguel.getFilmes()) {
-                filmeIds.add(f.getId());
-            }
-           
-            // 2. Buscar os filmes completos do banco
-            List<Filme> filmes = filmeService.findByIdList(filmeIds);
-            
-            
-            if(aluguel.getPessoa().getId()!=null && aluguel.getFilmes()!=null) {
-            	Optional<Pessoa> pessoa = Optional.of(pessoaService.findById(aluguel.getPessoa().getId()));
-            	aluguelResposta.setPessoa(pessoa.get());
-            	//System.out.println("Pessoa: " + aluguelResposta.getPessoa());
-            	
-            	for (Filme f : filmes) {
-            		// Verificar se há estoque
-                    if (f.getQuantidadeEstoque() <= 0) {
-                        throw new BadRequestAlertException("Filme sem estoque disponível", "filme", "estoquezerado");
-                    }
-                }
-            }
-
-            	
-            aluguelResposta.setFilmes(filmes);
-            
-            for (Filme f : filmes) {
-            //Decrescimo no Estoque
-            f.setQuantidadeEstoque(f.getQuantidadeEstoque()-1);
-            filmeService.salvarFilme(f);
-            }
-
-            
-            // Supondo que dataAluguel seja LocalDate:
-            LocalDate data = aluguel.getDataAluguel();
-            aluguelResposta.setDevolucaoPrevista(data.plusDays(30));
-            aluguelResposta.setStatus("Ativo");
-            return aluguelRepository.save(aluguelResposta);
-        }
-
-        throw new BadRequestAlertException("Dados incompletos para criar aluguel", "aluguel", "dadosinvalidos");
+//        if (aluguel.getValorAluguel() != null && aluguel.getDataAluguel() != null) {
+//            Aluguel aluguelResposta = new Aluguel();
+//            aluguelResposta.setValorAluguel(aluguel.getValorAluguel());
+//            aluguelResposta.setDataAluguel(aluguel.getDataAluguel());
+//            
+//            // 1. Extrair os IDs dos filmes recebidos
+//            List<Long> filmeIds = new ArrayList<>();
+//            for (Filme f : aluguel.getFilmes()) {
+//                filmeIds.add(f.getId());
+//            }
+//           
+//            // 2. Buscar os filmes completos do banco
+//            List<Filme> filmes = filmeService.findByIdList(filmeIds);
+//            
+//            
+//            if(aluguel.getPessoa().getId()!=null && aluguel.getFilmes()!=null) {
+//            	Optional<Pessoa> pessoa = Optional.of(pessoaService.findById(aluguel.getPessoa().getId()));
+//            	aluguelResposta.setPessoa(pessoa.get());
+//            	//System.out.println("Pessoa: " + aluguelResposta.getPessoa());
+//            	
+//            	for (Filme f : filmes) {
+//            		// Verificar se há estoque
+//                    if (f.getQuantidadeEstoque() <= 0) {
+//                        throw new BadRequestAlertException("Filme sem estoque disponível", "filme", "estoquezerado");
+//                    }
+//                }
+//            }
+//
+//            	
+//            aluguelResposta.setFilmes(filmes);
+//            
+//            for (Filme f : filmes) {
+//            //Decrescimo no Estoque
+//            f.setQuantidadeEstoque(f.getQuantidadeEstoque()-1);
+//            filmeService.salvarFilme(f);
+//            }
+//
+//            
+//            // Supondo que dataAluguel seja LocalDate:
+//            LocalDate data = aluguel.getDataAluguel();
+//            aluguelResposta.setDevolucaoPrevista(data.plusDays(30));
+//            aluguelResposta.setStatus("Ativo");
+//            return aluguelRepository.save(aluguelResposta);
+//        }
+//
+//        throw new BadRequestAlertException("Dados incompletos para criar aluguel", "aluguel", "dadosinvalidos");
+    	
+    	return null;
     }
 
-	@Override
-	public String deleteById(Long id) {
-		Optional<Aluguel> aluguelOpt = aluguelRepository.findById(id);
-		Aluguel aluguelResposta = new Aluguel();
-		if(aluguelOpt.isPresent()) {
-			aluguelResposta= aluguelOpt.get();
-			aluguelRepository.deleteById(aluguelResposta.getId());
-			return "Aluguel Excluida com sucesso";	
-		}
-		throw new BadRequestAlertException("Dados incompletos para criar aluguel", "aluguel", "dadosinvalidos");
-	}
+//	@Override
+//	public String deleteById(Long id) {
+//		Optional<Aluguel> aluguelOpt = aluguelRepository.findById(id);
+//		Aluguel aluguelResposta = new Aluguel();
+//		if(aluguelOpt.isPresent()) {
+//			aluguelResposta= aluguelOpt.get();
+//			aluguelRepository.deleteById(aluguelResposta.getId());
+//			return "Aluguel Excluida com sucesso";	
+//		}
+//		throw new BadRequestAlertException("Dados incompletos para criar aluguel", "aluguel", "dadosinvalidos");
+//	}
 
-	@Override
-	public boolean existsById(Long id) {
-		Optional<Aluguel> aluguelOpt = aluguelRepository.findById(id);
-		//Pessoa pessoaResposta = new Pessoa();
-		if(aluguelOpt.isPresent()) {
-			return true;
-		}
-		else {
-		return false;
-	}
-		}
+//	@Override
+//	public boolean existsById(Long id) {
+//		Optional<Aluguel> aluguelOpt = aluguelRepository.findById(id);
+//		//Pessoa pessoaResposta = new Pessoa();
+//		if(aluguelOpt.isPresent()) {
+//			return true;
+//		}
+//		else {
+//		return false;
+//	}
+//		}
 
 
 }

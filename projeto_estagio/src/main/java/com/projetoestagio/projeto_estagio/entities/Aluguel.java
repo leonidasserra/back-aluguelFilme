@@ -29,40 +29,40 @@ public class Aluguel implements Serializable {
 	private LocalDate devolucaoPrevista;
 	private String status;
 	
-    @ManyToOne
-    @JoinColumn(name = "pessoa_id") // chave estrangeira no banco
-    private Pessoa pessoa;
+//    @ManyToOne
+//    @JoinColumn(name = "pessoa_id") // chave estrangeira no banco
+//    private Pessoa pessoa;
 	
-    @ManyToMany
-    @JoinTable(
-        name = "aluguel_filmes",
-        joinColumns = @JoinColumn(name = "aluguel_id"),
-        inverseJoinColumns = @JoinColumn(name = "filme_id")
-    )
-    private List<Filme> filmes;
+//    @ManyToMany
+//    @JoinTable(
+//        name = "aluguel_filmes",
+//        joinColumns = @JoinColumn(name = "aluguel_id"),
+//        inverseJoinColumns = @JoinColumn(name = "filme_id")
+//    )
+//    private List<Filme> filmes;
     
-	public Aluguel() {
-	}
+//	public Aluguel() {
+//	}
 	
-	public Aluguel(Long id, BigDecimal valorAluguel, LocalDate dataAluguel, LocalDate devolucaoPrevista, String status,
-			Pessoa pessoa, List<Filme> filmes) {
-		this.id = id;
-		this.valorAluguel = valorAluguel;
-		this.dataAluguel = dataAluguel;
-		this.devolucaoPrevista = devolucaoPrevista;
-		this.status = status;
-		this.pessoa = pessoa;
-		this.filmes = filmes;
-	}
+//	public Aluguel(Long id, BigDecimal valorAluguel, LocalDate dataAluguel, LocalDate devolucaoPrevista, String status,
+//			Pessoa pessoa, List<Filme> filmes) {
+//		this.id = id;
+//		this.valorAluguel = valorAluguel;
+//		this.dataAluguel = dataAluguel;
+//		this.devolucaoPrevista = devolucaoPrevista;
+//		this.status = status;
+//		this.pessoa = pessoa;
+//		this.filmes = filmes;
+//	}
 
 
-	public Pessoa getPessoa() {
-	    return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-	    this.pessoa = pessoa;
-	}
+//	public Pessoa getPessoa() {
+//	    return pessoa;
+//	}
+//
+//	public void setPessoa(Pessoa pessoa) {
+//	    this.pessoa = pessoa;
+//	}
 	
 	public Long getId() {
 		return id;
@@ -96,13 +96,13 @@ public class Aluguel implements Serializable {
 	}
 
 
-	public List<Filme> getFilmes() {
-		return filmes;
-	}
-
-	public void setFilmes(List<Filme> filmes) {
-		this.filmes = filmes;
-	}
+//	public List<Filme> getFilmes() {
+//		return filmes;
+//	}
+//
+//	public void setFilmes(List<Filme> filmes) {
+//		this.filmes = filmes;
+//	}
 
 
 

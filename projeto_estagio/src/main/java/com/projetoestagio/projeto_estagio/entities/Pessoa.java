@@ -26,25 +26,25 @@ public class Pessoa implements Serializable {
 	
 	private Date nascimento;
 	
-	@OneToMany(mappedBy = "pessoa")
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	private List<Aluguel> aluguel;
+//	@OneToMany(mappedBy = "pessoa")
+//	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//	private List<Aluguel> aluguel;
 	
 	
-	public Pessoa() {
-	}	
-
-	public Pessoa(Long id, String cpf, String telefone, String name, String email, Date nascimento,
-			List<Aluguel> aluguel) {
-		super();
-		this.id = id;
-		this.cpf = cpf;
-		this.telefone = telefone;
-		this.name = name;
-		this.email = email;
-		this.nascimento = nascimento;
-		this.aluguel = aluguel;
-	}
+//	public Pessoa() {
+//	}	
+//
+//	public Pessoa(Long id, String cpf, String telefone, String name, String email, Date nascimento,
+//			List<Aluguel> aluguel) {
+//		super();
+//		this.id = id;
+//		this.cpf = cpf;
+//		this.telefone = telefone;
+//		this.name = name;
+//		this.email = email;
+//		this.nascimento = nascimento;
+//		this.aluguel = aluguel;
+//	}
 
 
 	public Long getId() {
@@ -95,21 +95,21 @@ public class Pessoa implements Serializable {
 		this.nascimento = nascimento;
 	}
 
-	public List<Aluguel> getAluguel() {
-		return aluguel;
-	}
-
-	public void setAluguel(List<Aluguel> aluguel) {
-		this.aluguel = aluguel;
-	}
+//	public List<Aluguel> getAluguel() {
+//		return aluguel;
+//	}
+//
+//	public void setAluguel(List<Aluguel> aluguel) {
+//		this.aluguel = aluguel;
+//	}
 
 	
 	
-	@Override
-	public String toString() {
-		return "Pessoa [id=" + id + ", cpf=" + cpf + ", telefone=" + telefone + ", name=" + name + ", email=" + email
-				+ ", nascimento=" + nascimento + ", aluguel=" + aluguel + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Pessoa [id=" + id + ", cpf=" + cpf + ", telefone=" + telefone + ", name=" + name + ", email=" + email
+//				+ ", nascimento=" + nascimento + ", aluguel=" + aluguel + "]";
+//	}
 
 
 }

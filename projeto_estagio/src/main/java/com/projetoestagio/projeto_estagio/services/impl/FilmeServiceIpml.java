@@ -5,11 +5,14 @@ import com.projetoestagio.projeto_estagio.services.FilmeService;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.stereotype.Service;
+
 import com.projetoestagio.projeto_estagio.entities.Filme;
 import com.projetoestagio.projeto_estagio.entities.Pessoa;
 import com.projetoestagio.projeto_estagio.exceptions.BadRequestAlertException;
 import com.projetoestagio.projeto_estagio.repositories.FilmeRepository;
 
+@Service
 public class FilmeServiceIpml implements FilmeService  {
 	private FilmeRepository filmeRepository ;
 

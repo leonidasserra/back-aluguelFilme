@@ -37,8 +37,8 @@ public class Filme implements Serializable{
     private String genero;
     
     
-    @ManyToMany(mappedBy = "filmes")
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @ManyToMany(mappedBy = "filmes")
+//	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private List<Aluguel> alugueis;
 
 	
