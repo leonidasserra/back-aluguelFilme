@@ -94,6 +94,13 @@ public class Aluguel implements Serializable {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "Aluguel [id=" + id + ", valorAluguel=" + valorAluguel + ", dataAluguel=" + dataAluguel
+				+ ", devolucaoPrevista=" + devolucaoPrevista + ", status=" + status + "]";
+	}
 
 
 //	public List<Filme> getFilmes() {

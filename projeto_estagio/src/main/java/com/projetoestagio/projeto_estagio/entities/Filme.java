@@ -39,7 +39,7 @@ public class Filme implements Serializable{
     
 //    @ManyToMany(mappedBy = "filmes")
 //	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	private List<Aluguel> alugueis;
+//	private List<Aluguel> alugueis;
 
 	
 	public Filme(){
@@ -48,7 +48,7 @@ public class Filme implements Serializable{
 
 
 	public Filme(Long id, String title, Integer ano, Integer quantidadeEstoque, String sinopse, String diretor,
-			Integer classificacao, Integer duracao, String genero, List<Aluguel> alugueis) {
+			Integer classificacao, Integer duracao, String genero /*, List<Aluguel> alugueis*/) {
 		this.id = id;
 		this.title = title;
 		this.ano = ano;
@@ -58,7 +58,7 @@ public class Filme implements Serializable{
 		this.classificacao = classificacao;
 		this.duracao = duracao;
 		this.genero = genero;
-		this.alugueis = alugueis;
+//		this.alugueis = alugueis;
 	}
 
 
@@ -157,14 +157,14 @@ public class Filme implements Serializable{
 	}
 
 
-	public List<Aluguel> getAlugueis() {
-		return alugueis;
-	}
-
-
-	public void setAlugueis(List<Aluguel> alugueis) {
-		this.alugueis = alugueis;
-	}
+//	public List<Aluguel> getAlugueis() {
+//		return alugueis;
+//	}
+//
+//
+//	public void setAlugueis(List<Aluguel> alugueis) {
+//		this.alugueis = alugueis;
+//	}
 
 
 

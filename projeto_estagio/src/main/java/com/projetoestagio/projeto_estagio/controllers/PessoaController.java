@@ -35,22 +35,21 @@ public class PessoaController {
 		return  ResponseEntity.created(new URI("/pessoa/criar")).body(respostaPessoa);
 		
 	}
-	@PutMapping("/atualizar")
-	public ResponseEntity<Pessoa> atualizarPessoa(@RequestBody Pessoa pessoa){
-		Pessoa respostaPessoa= pessoaService.atualizarPessoa(pessoa);
-		return ResponseEntity.ok(respostaPessoa);
-	} 
-	
+//	@PutMapping("/atualizar")
+//	public ResponseEntity<Pessoa> atualizarPessoa(@RequestBody Pessoa pessoa){
+//		Pessoa respostaPessoa= pessoaService.atualizarPessoa(pessoa);
+//		return ResponseEntity.ok(respostaPessoa);
+//	} 
+//	
 	@GetMapping("/buscar/{id}")
 	public ResponseEntity<Pessoa> buscarPessoaId(@PathVariable Long id){
-		if(pessoaService.existsById(id)) {
 		Pessoa respostaPessoa= pessoaService.findById(id);
 			return ResponseEntity.ok(respostaPessoa);}
 		
-		else {
-	        throw new BadRequestAlertException("Entity not found", "pessoa", "idnotfound");
-	    }
-	} 
+//		else {
+//	        throw new BadRequestAlertException("Entity not found", "pessoa", "idnotfound");
+//	    }
+//	} 
 	
 
 	@GetMapping("/buscar")
@@ -60,20 +59,20 @@ public class PessoaController {
 		
 	}
 	
-	@DeleteMapping("/deletar/{id}")
-	public ResponseEntity<Void> deletarPessoaId(@PathVariable Long id) {
-	    if (id == null) {
-	        throw new BadRequestAlertException("Invalid id", "pessoa", "idnull");
-	    }
-
-	    if (!pessoaService.existsById(id)) {
-	        throw new BadRequestAlertException("Entity not found", "pessoa", "idnotfound");
-	    }
-
-	    pessoaService.deleteById(id);
-
-	    return ResponseEntity.noContent().build();
-	}
+//	@DeleteMapping("/deletar/{id}")
+//	public ResponseEntity<Void> deletarPessoaId(@PathVariable Long id) {
+//	    if (id == null) {
+//	        throw new BadRequestAlertException("Invalid id", "pessoa", "idnull");
+//	    }
+//
+//	    if (!pessoaService.existsById(id)) {
+//	        throw new BadRequestAlertException("Entity not found", "pessoa", "idnotfound");
+//	    }
+//
+//	    pessoaService.deleteById(id);
+//
+//	    return ResponseEntity.noContent().build();
+//	}
 
 	
 }

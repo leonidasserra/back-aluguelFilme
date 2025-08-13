@@ -21,11 +21,11 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public /*abstract*/ class AluguelServiceIpml implements AluguelService {
 
-	@Autowired
-	private PessoaService pessoaService;
-	
-	@Autowired
-	private FilmeService filmeService;
+//	@Autowired
+//	private PessoaService pessoaService;
+//	
+//	@Autowired
+//	private FilmeService filmeService;
 	
     @Autowired
     private AluguelRepository aluguelRepository;
@@ -41,21 +41,25 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
 //    }
 //
 //
-//    @Override
-//    public Aluguel findById(Long id) {
-//        return aluguelRepository.findById(id)
-//                .orElseThrow(() -> new EntityNotFoundException("Aluguel não encontrado"));
-//    }
+    @Override
+    public Aluguel findById(Long id) {
+        return aluguelRepository.findById(id)
+                .orElseThrow(() -> new BadRequestAlertException("Entity not found", "aluguel", "idnotfound"));
+    }
+
+
 
 
   //READEQUAR CRIAR ALUGUEL
     
     @Override
     public Aluguel criarAluguel(Aluguel aluguel) {
-//        if (aluguel.getValorAluguel() != null && aluguel.getDataAluguel() != null) {
-//            Aluguel aluguelResposta = new Aluguel();
-//            aluguelResposta.setValorAluguel(aluguel.getValorAluguel());
-//            aluguelResposta.setDataAluguel(aluguel.getDataAluguel());
+        if (aluguel.getValorAluguel() != null && aluguel.getDataAluguel() != null) {
+            Aluguel aluguelResposta = new Aluguel();
+            aluguelResposta.setValorAluguel(aluguel.getValorAluguel());
+            aluguelResposta.setDataAluguel(aluguel.getDataAluguel());
+            aluguelResposta.setDevolucaoPrevista(aluguel.getDataAluguel().plusDays(30));
+            aluguelResposta.setStatus(aluguel.getStatus());
 //            
 //            // 1. Extrair os IDs dos filmes recebidos
 //            List<Long> filmeIds = new ArrayList<>();
@@ -94,12 +98,13 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
 //            LocalDate data = aluguel.getDataAluguel();
 //            aluguelResposta.setDevolucaoPrevista(data.plusDays(30));
 //            aluguelResposta.setStatus("Ativo");
-//            return aluguelRepository.save(aluguelResposta);
-//        }
+            aluguelResposta.toString();
+            return aluguelRepository.save(aluguelResposta);
+        }
 //
-//        throw new BadRequestAlertException("Dados incompletos para criar aluguel", "aluguel", "dadosinvalidos");
+        throw new BadRequestAlertException("Dados incompletos para criar aluguel", "aluguel", "dadosinvalidos");
     	
-    	return null;
+
     }
 
 //	@Override
@@ -127,4 +132,26 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
 //		}
 
 
+
+
+	@Override
+	public Aluguel finalizarAluguel(Long id) {
+			Aluguel aluguelResposta =  aluguelRepository.findById(id) 
+					.orElseThrow(() -> new EntityNotFoundException("Aluguel não encontrado"));
+;
+			aluguelResposta.setStatus("Finalizado");
+			
+		
+			return aluguelRepository.save(aluguelResposta);
+		
+	}
+
+
+
+
+
+
+
+	
+	
 }

@@ -14,6 +14,7 @@ import com.projetoestagio.projeto_estagio.entities.Pessoa;
 public interface PessoaRepository extends JpaRepository<Pessoa,Long> {
 	@Query("SELECT p FROM Pessoa p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%'))")
 	List<Pessoa> findByName(@Param("name") String name);
+	
 //	Pessoa criarPessoa(Pessoa pessoa);
 //	Pessoa deletePessoa(Pessoa pessoa);	
 //		

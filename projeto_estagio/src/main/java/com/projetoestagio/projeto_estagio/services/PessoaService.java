@@ -10,8 +10,8 @@ public interface PessoaService {
     Pessoa findById(Long id);
     List<Pessoa> findByName(String name);
     Pessoa criarPessoa(Pessoa pessoa);
-	String deleteById(Long id);
-	Pessoa atualizarPessoa(Pessoa pessoa);
-	boolean existsById(Long id);
-	public List<Pessoa> findAll();
+//	String deleteById(Long id);
+//	Pessoa atualizarPessoa(Pessoa pessoa);
+//	boolean existsById(Long id);
+//	public List<Pessoa> findAll();
 }

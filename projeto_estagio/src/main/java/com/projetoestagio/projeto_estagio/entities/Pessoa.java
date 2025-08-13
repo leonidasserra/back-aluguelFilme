@@ -2,6 +2,7 @@ package com.projetoestagio.projeto_estagio.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,17 +25,17 @@ public class Pessoa implements Serializable {
 	private String email;
 //	private String senha;
 	
-	private Date nascimento;
+	private LocalDate nascimento;
 	
 //	@OneToMany(mappedBy = "pessoa")
 //	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 //	private List<Aluguel> aluguel;
 	
 	
-//	public Pessoa() {
-//	}	
+	public Pessoa() {
+	}	
 //
-//	public Pessoa(Long id, String cpf, String telefone, String name, String email, Date nascimento,
+//	public Pessoa(Long id, String cpf, String telefone, String name, String email, LocalDate nascimento,
 //			List<Aluguel> aluguel) {
 //		super();
 //		this.id = id;
@@ -47,10 +48,23 @@ public class Pessoa implements Serializable {
 //	}
 
 
+	
+	
+
+
+	public Pessoa(Long id, String cpf, String telefone, String name, String email, LocalDate nascimento) {
+	this.id = id;
+	this.cpf = cpf;
+	this.telefone = telefone;
+	this.name = name;
+	this.email = email;
+	this.nascimento = nascimento;
+}
+	
 	public Long getId() {
 		return id;
 	}
-
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -87,11 +101,11 @@ public class Pessoa implements Serializable {
 		this.email = email;
 	}
 
-	public Date getNascimento() {
+	public LocalDate getNascimento() {
 		return nascimento;
 	}
 
-	public void setNascimento(Date nascimento) {
+	public void setNascimento(LocalDate nascimento) {
 		this.nascimento = nascimento;
 	}
 

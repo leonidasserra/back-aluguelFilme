@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,16 +29,7 @@ public class AluguelController {
 
 	@Autowired
 	private AluguelService aluguelService;
-	
-	
-//	private  AluguelService aluguelService;
-//	public AluguelController(AluguelService aluguelService) {
-//		this.aluguelService = aluguelService;
-//	}
 
-//	public AluguelService getAluguelService() {
-//		return aluguelService;
-//	}
 //
 //	public void setAluguelService(AluguelService aluguelService) {
 //		this.aluguelService = aluguelService;
@@ -59,17 +51,13 @@ public class AluguelController {
 //	    return ResponseEntity.noContent().build();
 //	}
 	
-//	@GetMapping("/buscar/{id}")
-//	public ResponseEntity<Aluguel> buscarAluguelId(@PathVariable Long id){
-//		if(aluguelService.existsById(id)) {
-//			Aluguel respostaAluguel= aluguelService.findById(id);
-//			return ResponseEntity.ok(respostaAluguel);}
-//		
-//		else {
-//	        throw new BadRequestAlertException("Entity not found", "aluguel", "idnotfound");
-//	    }
-//	} 
+
 	
+	@GetMapping("/buscar/{id}")
+	public ResponseEntity<Aluguel> buscarAluguelId(@PathVariable Long id){
+			Aluguel respostaAluguel= aluguelService.findById(id);
+			return ResponseEntity.ok(respostaAluguel);}
+
 	
 //	@GetMapping("/buscar")
 //	public ResponseEntity<List<Aluguel>> buscarPorNomePessoa(@RequestParam String name){
@@ -85,6 +73,12 @@ public class AluguelController {
 		
 		return  ResponseEntity.created(new URI("/aluguel/criar")).body(respostaAluguel);
 	}
+	
+	@PutMapping("/finalizar/{id}")
+	public ResponseEntity<Aluguel> finalizarAluguel(@PathVariable Long id){
+		Aluguel respostaAluguel= aluguelService.finalizarAluguel(id);
+		return ResponseEntity.ok(respostaAluguel);}
+	
 	
 	
 }
