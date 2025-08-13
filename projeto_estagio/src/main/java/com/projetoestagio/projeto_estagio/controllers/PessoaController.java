@@ -44,7 +44,8 @@ public class PessoaController {
 	@GetMapping("/buscar/{id}")
 	public ResponseEntity<Pessoa> buscarPessoaId(@PathVariable Long id){
 		Pessoa respostaPessoa= pessoaService.findById(id);
-			return ResponseEntity.ok(respostaPessoa);}
+			return ResponseEntity.ok(respostaPessoa);
+			}
 		
 //		else {
 //	        throw new BadRequestAlertException("Entity not found", "pessoa", "idnotfound");

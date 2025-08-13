@@ -21,8 +21,8 @@ import jakarta.persistence.EntityNotFoundException;
 @Service
 public /*abstract*/ class AluguelServiceIpml implements AluguelService {
 
-//	@Autowired
-//	private PessoaService pessoaService;
+	@Autowired
+	private PessoaService pessoaService;
 //	
 //	@Autowired
 //	private FilmeService filmeService;
@@ -71,9 +71,10 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
 //            List<Filme> filmes = filmeService.findByIdList(filmeIds);
 //            
 //            
-//            if(aluguel.getPessoa().getId()!=null && aluguel.getFilmes()!=null) {
-//            	Optional<Pessoa> pessoa = Optional.of(pessoaService.findById(aluguel.getPessoa().getId()));
-//            	aluguelResposta.setPessoa(pessoa.get());
+            if(aluguel.getPessoa().getId()!=null /* && aluguel.getFilmes()!=null */) {
+            	Optional<Pessoa> pessoa = Optional.of(pessoaService.findById(aluguel.getPessoa().getId()));
+            	aluguelResposta.setPessoa(pessoa.get());
+            	}
 //            	//System.out.println("Pessoa: " + aluguelResposta.getPessoa());
 //            	
 //            	for (Filme f : filmes) {

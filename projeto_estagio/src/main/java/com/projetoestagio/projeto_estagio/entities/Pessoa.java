@@ -27,9 +27,9 @@ public class Pessoa implements Serializable {
 	
 	private LocalDate nascimento;
 	
-//	@OneToMany(mappedBy = "pessoa")
-//	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-//	private List<Aluguel> aluguel;
+	@OneToMany(mappedBy = "pessoa")
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	private List<Aluguel> aluguel;
 	
 	
 	public Pessoa() {

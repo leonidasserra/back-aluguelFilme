@@ -29,9 +29,9 @@ public class Aluguel implements Serializable {
 	private LocalDate devolucaoPrevista;
 	private String status;
 	
-//    @ManyToOne
-//    @JoinColumn(name = "pessoa_id") // chave estrangeira no banco
-//    private Pessoa pessoa;
+    @ManyToOne
+    @JoinColumn(name = "pessoa_id") // chave estrangeira no banco
+    private Pessoa pessoa;
 	
 //    @ManyToMany
 //    @JoinTable(
@@ -41,8 +41,8 @@ public class Aluguel implements Serializable {
 //    )
 //    private List<Filme> filmes;
     
-//	public Aluguel() {
-//	}
+	public Aluguel() {
+	}
 	
 //	public Aluguel(Long id, BigDecimal valorAluguel, LocalDate dataAluguel, LocalDate devolucaoPrevista, String status,
 //			Pessoa pessoa, List<Filme> filmes) {
@@ -96,11 +96,26 @@ public class Aluguel implements Serializable {
 	}
 	
 	
-	@Override
-	public String toString() {
-		return "Aluguel [id=" + id + ", valorAluguel=" + valorAluguel + ", dataAluguel=" + dataAluguel
-				+ ", devolucaoPrevista=" + devolucaoPrevista + ", status=" + status + "]";
+	public Pessoa getPessoa() {
+		return pessoa;
 	}
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+	
+	
+	public Aluguel(Long id, BigDecimal valorAluguel, LocalDate dataAluguel, LocalDate devolucaoPrevista, String status,
+			Pessoa pessoa) {
+		this.id = id;
+		this.valorAluguel = valorAluguel;
+		this.dataAluguel = dataAluguel;
+		this.devolucaoPrevista = devolucaoPrevista;
+		this.status = status;
+		this.pessoa = pessoa;
+	}
+
+	
+	
 
 
 //	public List<Filme> getFilmes() {
