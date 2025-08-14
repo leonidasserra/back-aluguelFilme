@@ -12,7 +12,7 @@ public interface AluguelService {
     Aluguel finalizarAluguel(Long id);
     
 //	String deleteById(Long id);
-//	List<Aluguel> buscarPorNomePessoa(String nome);
+	List<Aluguel> buscarPorNomePessoa(String nome);
 //	boolean existsById(Long id);
 //	List<Aluguel> buscarPorTituloFilme(String titulo);
 }

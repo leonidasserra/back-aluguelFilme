@@ -32,7 +32,7 @@ public class FilmeServiceIpml implements FilmeService  {
 		List<Filme> filme = filmeRepository.findByTitle(name);
 		
 		if(filme.isEmpty()) {
-			throw new BadRequestAlertException("Pessoa não encontrada", "filme", "titlenotfound");
+			throw new BadRequestAlertException("Filme não encontrado", "filme", "titlenotfound");
 		}
 
 			return filme;

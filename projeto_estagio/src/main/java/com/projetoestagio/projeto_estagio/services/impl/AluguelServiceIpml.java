@@ -30,10 +30,17 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
     @Autowired
     private AluguelRepository aluguelRepository;
 
-//    @Override
-//    public List<Aluguel> buscarPorNomePessoa(String nome) {
-//        return aluguelRepository.findByPessoaNameContainingIgnoreCase(nome);
-//    }
+    @Override
+    public List<Aluguel> buscarPorNomePessoa(String nome) {
+    	List<Aluguel> aluguelResposta = aluguelRepository.buscarPorNomePessoa(nome);
+    	
+    	if(aluguelResposta.isEmpty()) {
+    		throw new BadRequestAlertException("Entity not found", "aluguel", "namenotfound");
+    	   
+    	}
+    	
+        return aluguelResposta;
+ }
 //    
 //    @Override
 //    public List<Aluguel> buscarPorTituloFilme(String title) {

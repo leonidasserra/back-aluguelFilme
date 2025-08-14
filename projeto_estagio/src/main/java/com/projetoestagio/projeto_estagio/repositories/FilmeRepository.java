@@ -12,6 +12,7 @@ import com.projetoestagio.projeto_estagio.entities.Filme;
 
 @Repository
 public interface FilmeRepository extends JpaRepository<Filme,Long> {
+	
 	@Query("SELECT f FROM Filme f WHERE LOWER(f.title) LIKE LOWER(CONCAT('%', :title, '%'))")
 	List<Filme> findByTitle(String title);
 		

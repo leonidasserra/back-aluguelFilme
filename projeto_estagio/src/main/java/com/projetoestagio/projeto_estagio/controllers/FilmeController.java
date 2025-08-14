@@ -2,6 +2,7 @@ package com.projetoestagio.projeto_estagio.controllers;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,11 @@ public class FilmeController {
 	@GetMapping("/buscar/{id}")
 	public ResponseEntity<Filme> buscarFilmeId(@PathVariable Long id){
 		Filme respostaFilme= filmeService.findById(id);
+		return  ResponseEntity.ok(respostaFilme);
+	}
+	@GetMapping("/buscar")
+	public ResponseEntity<List<Filme>> buscarFilmeId(@RequestParam String title){
+		List<Filme> respostaFilme= filmeService.findByName(title);
 		return  ResponseEntity.ok(respostaFilme);
 	}
 }
