@@ -1,7 +1,9 @@
 package com.projetoestagio.projeto_estagio.entities;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 //import com.projetoestagio.projeto_estagio.entities.enums.Genero;
@@ -9,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,9 +40,10 @@ public class Filme implements Serializable{
     private String genero;
     
     
-//    @ManyToMany(mappedBy = "filmes")
-//	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-//	private List<Aluguel> alugueis;
+
+    @ManyToMany(mappedBy = "filmes", fetch = FetchType.LAZY)
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Set<Aluguel> alugueis = new HashSet<>();
 
 	
 	public Filme(){
@@ -47,8 +51,16 @@ public class Filme implements Serializable{
 
 
 
+
+
+
+
+
+
+
 	public Filme(Long id, String title, Integer ano, Integer quantidadeEstoque, String sinopse, String diretor,
-			Integer classificacao, Integer duracao, String genero /*, List<Aluguel> alugueis*/) {
+			Integer classificacao, Integer duracao, String genero, Set<Aluguel> alugueis) {
+
 		this.id = id;
 		this.title = title;
 		this.ano = ano;
@@ -58,8 +70,11 @@ public class Filme implements Serializable{
 		this.classificacao = classificacao;
 		this.duracao = duracao;
 		this.genero = genero;
-//		this.alugueis = alugueis;
+		this.alugueis = alugueis;
 	}
+
+
+
 
 
 
@@ -157,14 +172,18 @@ public class Filme implements Serializable{
 	}
 
 
-//	public List<Aluguel> getAlugueis() {
-//		return alugueis;
-//	}
-//
-//
-//	public void setAlugueis(List<Aluguel> alugueis) {
-//		this.alugueis = alugueis;
-//	}
+
+	public Set<Aluguel> getAlugueis() {
+		return alugueis;
+	}
+
+
+
+	public void setAlugueis(Set<Aluguel> alugueis) {
+		this.alugueis = alugueis;
+	}
+
+
 
 
 
