@@ -123,6 +123,12 @@ public class FilmeServiceIpml implements FilmeService  {
 //    	
 //    	return todosFilmes;
 //    }
+
+	@Override
+	public List<Filme> findAll() {
+		
+		return filmeRepository.findAll();
+	}
     
 	
 	

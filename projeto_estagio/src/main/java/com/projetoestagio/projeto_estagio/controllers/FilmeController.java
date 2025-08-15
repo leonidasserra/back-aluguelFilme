@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.projetoestagio.projeto_estagio.entities.Aluguel;
 import com.projetoestagio.projeto_estagio.entities.Filme;
 import com.projetoestagio.projeto_estagio.entities.Pessoa;
 import com.projetoestagio.projeto_estagio.services.FilmeService;
@@ -42,5 +43,11 @@ public class FilmeController {
 	public ResponseEntity<List<Filme>> buscarFilmeId(@RequestParam String title){
 		List<Filme> respostaFilme= filmeService.findByName(title);
 		return  ResponseEntity.ok(respostaFilme);
+	}
+	
+	@GetMapping("/listar")
+	public ResponseEntity<List<Filme>> buscarTodosFilmes(){
+		List<Filme> respostaFilme= filmeService.findAll();
+		return ResponseEntity.ok(respostaFilme);
 	}
 }
