@@ -2,8 +2,10 @@ package com.projetoestagio.projeto_estagio.services.impl;
 
 import com.projetoestagio.projeto_estagio.services.FilmeService;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -78,6 +80,8 @@ public class FilmeServiceIpml implements FilmeService  {
 		throw new BadRequestAlertException("Dados Incompletos para Pessoa", "pessoa", "dadosinvalidos"); 
 	}
 
+
+
 //	@Override
 //	public Filme atualizarFilme(Filme filme) {
 //		// TODO Auto-generated method stub
@@ -96,22 +100,22 @@ public class FilmeServiceIpml implements FilmeService  {
 //	}
 //		}
 
-//    @Override
-//    public Filme salvarFilme(Filme filme) {
-//        return filmeRepository.save(filme); //  salva alterações (usado no set do novo estoque)
-//    }
+    @Override
+    public Filme salvarFilme(Filme filme) {
+        return filmeRepository.save(filme); //  salva alterações (usado no set do novo estoque)
+    }
 //
 //    
-//    @Override
-//    public List<Filme> findByIdList(List<Long> ids) {
-//        List<Filme> filmes = filmeRepository.findAllById(ids);
-//
-//        if (filmes.size() != ids.size()) {
-//            throw new BadRequestAlertException("Um ou mais filmes não foram encontrados", "filme", "idnotfound");
-//        }
-//
-//        return filmes;
-//    }
+    @Override
+    public Set<Filme> findByIdList(Set<Long> ids) {
+        Set<Filme> filmes = new HashSet<>(filmeRepository.findAllById(ids));
+
+        if (filmes.size() != ids.size()) {
+            throw new BadRequestAlertException("Um ou mais filmes não foram encontrados", "filme", "idnotfound");
+        }
+
+        return filmes;
+    }
 //
 //    @Override
 //    public List<Filme> findAll(){

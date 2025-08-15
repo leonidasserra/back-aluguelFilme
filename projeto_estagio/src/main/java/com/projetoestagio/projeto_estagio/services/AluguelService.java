@@ -1,6 +1,7 @@
 package com.projetoestagio.projeto_estagio.services;
 
 import java.util.List;
+import java.util.Set;
 
 import com.projetoestagio.projeto_estagio.entities.Aluguel;
 
@@ -10,9 +11,12 @@ public interface AluguelService {
 	
     Aluguel criarAluguel(Aluguel aluguel);
     Aluguel finalizarAluguel(Long id);
+
+	List<Aluguel> buscarPorNomePessoa(String nome);
     
 //	String deleteById(Long id);
-	List<Aluguel> buscarPorNomePessoa(String nome);
+//	List<Aluguel> buscarPorNomePessoa(String nome);
 //	boolean existsById(Long id);
 //	List<Aluguel> buscarPorTituloFilme(String titulo);
+
 }

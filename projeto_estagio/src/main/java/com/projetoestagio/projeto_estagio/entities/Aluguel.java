@@ -136,21 +136,21 @@ public class Aluguel implements Serializable {
 
 	
 	
-//
-//	@Override
-//	public boolean equals(Object o) {
-//	    // Verifica se o objeto comparado é exatamente o mesmo na memória
-//	    if (this == o) return true;
-//
-//	    // Verifica se o objeto é da mesma classe
-//	    if (!(o instanceof Filme)) return false;
-//
-//	    // Faz o cast para Filme, já que é seguro depois da verificação acima
-//	    Filme f = (Filme) o;
-//
-//	    // Considera dois filmes iguais se seus IDs forem não nulos e iguais
-//	    return id != null && id.equals(f.id);
-//	}
+
+	@Override
+	public boolean equals(Object o) {
+	    // Verifica se o objeto comparado é exatamente o mesmo na memória
+	    if (this == o) return true;
+
+	    // Verifica se o objeto é da mesma classe
+	    if (!(o instanceof Filme)) return false;
+
+	    // Faz o cast para Filme, já que é seguro depois da verificação acima
+	    Filme f = (Filme) o;
+
+	    // Considera dois filmes iguais se seus IDs forem não nulos e iguais
+	    return id != null && id.equals(f.getId());
+	}
 //
 //	@Override
 //	public int hashCode() {
