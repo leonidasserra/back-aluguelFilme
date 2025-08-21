@@ -62,6 +62,14 @@ public class PessoaController {
 		
 	}
 	
+	
+	@GetMapping("/listar")
+	public ResponseEntity<List<Pessoa>> listarPessoas(){
+		List<Pessoa> respostaPessoa= pessoaService.findAll();
+		return ResponseEntity.ok(respostaPessoa);
+		
+	}
+	
 //	@DeleteMapping("/deletar/{id}")
 //	public ResponseEntity<Void> deletarPessoaId(@PathVariable Long id) {
 //	    if (id == null) {

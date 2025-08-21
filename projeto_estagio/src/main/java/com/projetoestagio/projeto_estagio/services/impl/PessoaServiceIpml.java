@@ -45,6 +45,14 @@ public class PessoaServiceIpml implements PessoaService{
 			return pessoas;
 	}
 
+	
+	@Override
+	public List<Pessoa> findAll() {
+		
+		return pessoaRepository.findAll();
+	}
+	
+	
 	@Override
 	public Pessoa criarPessoa(Pessoa pessoa) {
 		Pessoa pessoaResposta = new Pessoa();

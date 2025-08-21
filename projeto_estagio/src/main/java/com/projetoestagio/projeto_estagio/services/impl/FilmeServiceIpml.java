@@ -56,8 +56,8 @@ public class FilmeServiceIpml implements FilmeService  {
 	public Filme criarFilme(Filme filme) {
 		Filme filmeResposta=new Filme();
 		
-		if ((filme.getTitle().trim().isEmpty()
-			    && filme.getAno() != null
+		if ((!filme.getTitle().isEmpty()
+			    &&filme.getAno() != null
 			    && filme.getQuantidadeEstoque() != null
 			    && !filme.getGenero().isEmpty()
 			    && !filme.getSinopse().isEmpty()
@@ -77,7 +77,7 @@ public class FilmeServiceIpml implements FilmeService  {
 			    return filmeRepository.save(filmeResposta);
 			    }
 			    	
-		throw new BadRequestAlertException("Dados Incompletos para Pessoa", "pessoa", "dadosinvalidos"); 
+		throw new BadRequestAlertException("Dados Incompletos para Filme", "filme", "dadosinvalidos"); 
 	}
 
 

@@ -14,4 +14,5 @@ public interface PessoaService {
 //	Pessoa atualizarPessoa(Pessoa pessoa);
 //	boolean existsById(Long id);
 //	public List<Pessoa> findAll();
+	List<Pessoa> findAll();
 }
