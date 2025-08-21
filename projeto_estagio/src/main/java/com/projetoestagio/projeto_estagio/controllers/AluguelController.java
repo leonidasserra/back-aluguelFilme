@@ -66,6 +66,10 @@ public class AluguelController {
 		return ResponseEntity.ok(respostaAluguel);
 		
 	}	
+	@GetMapping("/buscafilme/{id}")
+	public ResponseEntity<List<Aluguel>> buscarPorFilmeId(@PathVariable Long id){
+		List<Aluguel> respostaAluguel= aluguelService.buscarPorIdFilme(id);
+		return ResponseEntity.ok(respostaAluguel);}
 	
 	@PostMapping("/criar")
 	public ResponseEntity<Aluguel> criarAluguel(@RequestBody Aluguel aluguel) throws URISyntaxException {

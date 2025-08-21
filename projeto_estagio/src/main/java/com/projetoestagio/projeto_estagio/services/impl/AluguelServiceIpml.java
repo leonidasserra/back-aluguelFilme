@@ -152,6 +152,11 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
 			return aluguelRepository.save(aluguelResposta);
 		
 	}
+	@Override
+	public List<Aluguel> buscarPorIdFilme(Long id) {
+		
+		return aluguelRepository.buscarPorIdFilme(id);
+	}
 
 
 
