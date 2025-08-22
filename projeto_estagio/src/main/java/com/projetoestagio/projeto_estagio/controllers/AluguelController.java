@@ -79,6 +79,7 @@ public class AluguelController {
 		return  ResponseEntity.created(new URI("/aluguel/criar")).body(respostaAluguel);
 	}
 	
+	
 	@PutMapping("/finalizar/{id}")
 	public ResponseEntity<Aluguel> finalizarAluguel(@PathVariable Long id){
 		Aluguel respostaAluguel= aluguelService.finalizarAluguel(id);

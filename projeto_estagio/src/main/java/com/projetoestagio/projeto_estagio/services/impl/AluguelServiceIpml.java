@@ -148,7 +148,10 @@ public /*abstract*/ class AluguelServiceIpml implements AluguelService {
 ;
 			aluguelResposta.setStatus("Finalizado");
 			
-		
+			Set<Filme> filmes =aluguelResposta.getFilmes();
+			for (Filme f : filmes) {
+				f.setQuantidadeEstoque(f.getQuantidadeEstoque()+1);
+			}
 			return aluguelRepository.save(aluguelResposta);
 		
 	}
