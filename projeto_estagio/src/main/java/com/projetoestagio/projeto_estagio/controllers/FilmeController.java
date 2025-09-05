@@ -20,8 +20,7 @@ import com.projetoestagio.projeto_estagio.entities.Filme;
 import com.projetoestagio.projeto_estagio.entities.Pessoa;
 import com.projetoestagio.projeto_estagio.services.FilmeService;
 
-@CrossOrigin("*")
-
+@CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/filme")
 public class FilmeController {

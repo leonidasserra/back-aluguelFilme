@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import com.projetoestagio.projeto_estagio.dtos.users.CreateUserDTO;
 import com.projetoestagio.projeto_estagio.entities.User;
 import com.projetoestagio.projeto_estagio.repositories.UserRepository;
 
+@CrossOrigin("*")
 @RestController
 public class UserController {
 	
@@ -35,11 +37,8 @@ public class UserController {
         var user = new User();
         user.setUsername(dto.username());
         user.setPassword(passwordEncoder.encode(dto.password()));
-        user.setCpf(dto.cpf());
         user.setName(dto.name());
         user.setEmail(dto.email());
-        user.setNascimento(dto.nascimento());
-        user.setTelefone(dto.telefone());
         userRepository.save(user);
         return ResponseEntity.ok().build();
         

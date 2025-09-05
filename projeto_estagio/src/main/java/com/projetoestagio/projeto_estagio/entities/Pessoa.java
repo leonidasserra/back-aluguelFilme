@@ -19,6 +19,7 @@ public class Pessoa implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	
 	private String cpf;
 	private String telefone;
 	private String name;

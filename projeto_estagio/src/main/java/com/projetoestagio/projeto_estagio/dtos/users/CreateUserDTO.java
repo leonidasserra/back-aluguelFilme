@@ -10,27 +10,20 @@ public record CreateUserDTO(
 		@NotBlank(message = "O nome é obrigatório.")
 	    String name,
 	    
-	    @NotBlank(message = "O nome é obrigatório.")
+	    @NotBlank(message = "O username é obrigatório.")
 		String username,
 		
-		@NotBlank(message = "O nome é obrigatório.")
+		@NotBlank(message = "A senha é obrigatório.")
 		String password,
 	    
 	    @Pattern(regexp = "\\d{11}", message = "O CPF deve conter 11 dígitos numéricos.")
 	    String cpf,
-	    
-	    @Pattern(regexp = "\\d{10,11}", message = "O telefone deve conter entre 10 e 11 dígitos.")
-	    String telefone,
+
 	    
 	    @NotBlank(message = "O e-mail é obrigatório.")
-	    String email,
+	    String email
 	    
-	    @NotNull(message = "A data de nascimento é obrigatória.")
-	    LocalDate nascimento
-		
-		
-		
-		
+	
 ) {
 	
 }
